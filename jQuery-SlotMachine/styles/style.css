@@ -50,9 +50,13 @@ a:hover{
 }
 
 .slotMachine .slot{
-  height:100px;
-  background-position-x: 55%;
-  background-repeat: no-repeat;
+    height: 100px;
+    background-position-x: 55%;
+    background-repeat: no-repeat;
+    /* background: #fff; */
+    font-size: 4rem;
+    font-family: cursive;
+    background-image: linear-gradient(#fff2b0, white);
 }
 
 .slot1 {

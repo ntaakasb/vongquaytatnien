@@ -19,6 +19,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  
   </head>
 <style>
 
@@ -64,7 +67,7 @@
       <div class="content">
 
         <div>
-          <div id="casino1" class="slotMachine" style="margin-left: -65px;">
+          <div id="casino1" class="num1 slotMachine" style="margin-left: -65px;">
             <div class="slot">1</div>
             <div class="slot">2</div>
             <div class="slot">3</div>
@@ -73,22 +76,22 @@
             <div class="slot">6</div>
           </div>
 
-          <div id="casino2" class="slotMachine">
-            <div class="slot slot1"></div>
-            <div class="slot slot2"></div>
-            <div class="slot slot3"></div>
-            <div class="slot slot4"></div>
-            <div class="slot slot5"></div>
-            <div class="slot slot6"></div>
+          <div id="casino2" class="num2 slotMachine">
+           <div class="slot">1</div>
+            <div class="slot">2</div>
+            <div class="slot">3</div>
+            <div class="slot">4</div>
+            <div class="slot">5</div>
+            <div class="slot">6</div>
           </div>
 
           <div id="casino3" class="slotMachine">
-            <div class="slot slot1"></div>
-            <div class="slot slot2"></div>
-            <div class="slot slot3"></div>
-            <div class="slot slot4"></div>
-            <div class="slot slot5"></div>
-            <div class="slot slot6"></div>
+           <div class="slot">1</div>
+            <div class="slot">2</div>
+            <div class="slot">3</div>
+            <div class="slot">4</div>
+            <div class="slot">5</div>
+            <div class="slot">6</div>
           </div>
 
           <div class="btn-group btn-group-justified" role="group">
@@ -96,6 +99,7 @@
             <button id="casinoStop" type="button" class="btn btn-primary btn-lg">Stop!</button>
           </div>
         </div>
+
       </div>
 
     </div>
@@ -118,6 +122,8 @@ const mCasino3 = new SlotMachine(casino3, {
   active: 2,
   delay: 500
 });
+
+
     </script>
     <script id="codeScript6">
 btnShuffle.addEventListener('click', () => {
@@ -147,16 +153,49 @@ btnStop.addEventListener('click', () => {
 
 
   <script>
-
-
-$(function () {
-	    setInterval(function () {
-		    $('.star-1').fadeOut(150).delay(2000).fadeIn(300).fadeOut(150).delay(1254);
-	        $('.star-2').fadeOut(300).fadeIn(120).fadeOut(120).delay(1920);
-	        $('.star-3').fadeOut(150).delay(1200).fadeIn(300).fadeOut(150).delay(800);
-	        $('.star-4').fadeOut(700).fadeIn(300).fadeOut(160).delay(1350);
-	    }, 1);
+$('#submit-file').on("click",function(e){
+		e.preventDefault();
+		$('#files').parse({
+			config: {
+				delimiter: "auto",
+				complete: displayHTMLTable,
+			},
+			before: function(file, inputElem)
+			{
+				//console.log("Parsing file...", file);
+			},
+			error: function(err, file)
+			{
+				//console.log("ERROR:", err, file);
+			},
+			complete: function()
+			{
+				//console.log("Done with all files");
+			}
+		});
     });
+
+	function displayHTMLTable(results){
+	var table = "<table class='table'>";
+	var data = results.data;
+	 
+	for(i=0;i<data.length;i++){
+		table+= "<tr>";
+		var row = data[i];
+		var cells = row.join(",").split(",");
+		 
+		for(j=0;j<cells.length;j++){
+			table+= "<td>";
+			table+= cells[j];
+			table+= "</th>";
+		}
+		table+= "</tr>";
+	}
+	table+= "</table>";
+	$("#parsed_csv_list").html(table);
+}
+
+
   </script>
 
   </body>
