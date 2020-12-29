@@ -12,6 +12,7 @@ namespace WebApp
     {
         public void Hello()
         {
+            DbHelper.Main();
             Clients.All.hello();
         }
         public void Send(string name, string message)
