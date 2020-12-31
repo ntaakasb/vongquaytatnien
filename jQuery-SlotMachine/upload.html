@@ -10,10 +10,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   
   </head>
-  
-  
+
+<form class="form-inline">
+	<div class="form-group">
+	  <label for="files">Upload a CSV formatted file:</label>
+	  <input type="file" id="files"  class="form-control" accept=".csv" required />
+	</div>
+	<div class="form-group">
+	 <button type="submit" id="submit-file" class="btn btn-primary">Upload File</button>
+	 </div>
+</form>
+
+<div id="parsed_csv_list"></div>
   <body>
   <script>
+  
+  if (typeof(Storage) !== "undefined") {
+  // Code for localStorage/sessionStorage.
+} else {
+  alert('Storage is not support on this browser');
+}
+  
+  
 $('#submit-file').on("click",function(e){
 		e.preventDefault();
 		$('#files').parse({
@@ -23,20 +41,21 @@ $('#submit-file').on("click",function(e){
 			},
 			before: function(file, inputElem)
 			{
-				//console.log("Parsing file...", file);
+				console.log("Parsing file...", file);
 			},
 			error: function(err, file)
 			{
-				//console.log("ERROR:", err, file);
+				console.log("ERROR:", err, file);
 			},
 			complete: function()
 			{
-				//console.log("Done with all files");
+				console.log("Done with all files");
 			}
 		});
     });
 
 	function displayHTMLTable(results){
+	
 	var table = "<table class='table'>";
 	var data = results.data;
 	 
