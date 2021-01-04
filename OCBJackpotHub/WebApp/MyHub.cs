@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using WebApp.Data;
+using OfficeOpenXml;
 
 namespace WebApp
 {
@@ -15,7 +17,7 @@ namespace WebApp
     {
         public void Hello()
         {
-            readExcel();
+            editRow();
             Clients.All.hello();
         }
         public void Send(string name, string message)
@@ -26,14 +28,18 @@ namespace WebApp
 
         public void readExcel()
         {
-            string con =
-    @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\WorkSpace\Project Outsource\slotmachine\vongquaytatnien\Data.xlsx;" +
-    @"Extended Properties='Excel 12.0;HDR=Yes;'";
-            using (OleDbConnection connection = new OleDbConnection(con))
+            string connString = ConfigurationManager.ConnectionStrings["xlsx"].ConnectionString;
+            // Create the connection object
+            OleDbConnection oledbConn = new OleDbConnection(connString);
+            try
             {
-                connection.Open();
-                OleDbCommand cmd = new OleDbCommand("select * from [Sheet1$]", connection);
-                //Or Use OleDbCommand
+                // Open connection
+                oledbConn.Open();
+
+                // Create OleDbCommand object and select data from worksheet Sheet1
+                OleDbCommand cmd = new OleDbCommand("SELECT * FROM [Sheet1$]", oledbConn);
+
+                // Create new OleDbDataAdapter
                 OleDbDataAdapter oleda = new OleDbDataAdapter();
 
                 oleda.SelectCommand = cmd;
@@ -43,7 +49,42 @@ namespace WebApp
 
                 // Fill the DataSet from the data extracted from the worksheet.
                 oleda.Fill(ds, "Employees");
+
+                // Bind the data to the GridView
             }
+            catch (Exception ex)
+            {
+                string e = ex.Message;
+            }
+            finally
+            {
+                // Close connection
+                oledbConn.Close();
+            }
+        }
+
+        public void editRow()
+        {
+        
+            // path to your excel file
+            string path = @"F:\workspace\git\vongquaytatnien\OCBJackpotHub\WebApp\datanumber.xlsx";
+            FileInfo fileInfo = new FileInfo(path);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage package = new ExcelPackage(fileInfo);
+            ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
+
+            // get number of rows in the sheet
+            int rows = worksheet.Dimension.Rows; // 10
+
+            // loop through the worksheet rows
+            for (int i = 1; i <= rows; i++)
+            {
+                // replace occurences
+                worksheet.Cells[i, 2].Value = "ABCD";
+            }
+
+            // save changes
+            package.Save();
         }
     }
 }
