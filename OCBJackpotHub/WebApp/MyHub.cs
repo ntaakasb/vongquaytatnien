@@ -8,17 +8,19 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using Newtonsoft.Json;
 using OfficeOpenXml;
+using WebApp.Model;
 
 namespace WebApp
 {
     [HubName("myHub")]
     public class MyHub : Hub
     {
-        public void Hello()
+        public void LoadNumber()
         {
-            editRow();
-            Clients.All.hello();
+            List<LuckyNumber>  lsNumber = loadNumber();
+            Clients.All.returnNumber(JsonConvert.SerializeObject(lsNumber));
         }
         public void Send(string name, string message)
         {
@@ -26,7 +28,7 @@ namespace WebApp
             Clients.All.broadcastMessage(name, message);
         }
 
-        public void readExcel()
+        private List<LuckyNumber> loadNumber()
         {
             string connString = ConfigurationManager.ConnectionStrings["xlsx"].ConnectionString;
             // Create the connection object
@@ -51,10 +53,29 @@ namespace WebApp
                 oleda.Fill(ds, "Employees");
 
                 // Bind the data to the GridView
+                DataTable dt = ds.Tables[0];
+                List<LuckyNumber> luckyModel = new List<LuckyNumber>();
+                if(dt != null)
+                {
+                   foreach(DataRow dr in dt.Rows)
+                    {
+
+                        LuckyNumber item = new LuckyNumber();
+                        item.index = dr[0] != null ? int.Parse(dr[0].ToString()) : 0;
+                        item.number1 = dr[1] != null ? int.Parse(dr[1].ToString()) : 0;
+                        item.number2 = dr[2] != null ? int.Parse(dr[2].ToString()) : 0;
+                        item.number3 = dr[3] != null ? int.Parse(dr[3].ToString()) : 0;
+                        item.displayed = dr[4] != null ? int.Parse(dr[4].ToString()) : 0;
+                        item.prizeCode = dr[5] != null ? int.Parse(dr[5].ToString()) : 0;
+                        luckyModel.Add(item);
+                    }
+                }
+                return luckyModel;
             }
             catch (Exception ex)
             {
                 string e = ex.Message;
+                return new List<LuckyNumber>();
             }
             finally
             {
@@ -67,7 +88,7 @@ namespace WebApp
         {
         
             // path to your excel file
-            string path = @"F:\workspace\git\vongquaytatnien\OCBJackpotHub\WebApp\datanumber.xlsx";
+            string path = @"D:\WorkSpace\Project Outsource\slotmachine\vongquaytatnien\OCBJackpotHub\WebApp\dataNumber.xlsx";
             FileInfo fileInfo = new FileInfo(path);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage package = new ExcelPackage(fileInfo);

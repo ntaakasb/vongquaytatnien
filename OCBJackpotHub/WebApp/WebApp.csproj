@@ -134,6 +134,7 @@
     <Content Include="img\slot6.png" />
     <Content Include="img\triky.jpg" />
     <Content Include="img\watch.png" />
+    <Content Include="control.html" />
     <Content Include="Index.html" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -146,6 +147,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\LuckyNumber.cs" />
     <Compile Include="MyHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
