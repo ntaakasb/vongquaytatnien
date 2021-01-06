@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="/dist/slotmachine.js"></script>
-    <script src="/dist/jquery.slotmachine.js"></script>
+
 
 
 
@@ -36,6 +35,136 @@
             .popupCustom .modal-body {
                 padding: 10rem 9rem;
             }
+
+
+        .star {
+            position: absolute;
+            background: url(https://mtedwards.s3.amazonaws.com/sparkle.png) no-repeat;
+            background-size: contain;
+            overflow: hidden;
+        }
+
+            .star.star-1 {
+                width: 50px;
+                height: 34px;
+                top: 110px;
+                left: 20%;
+            }
+
+            .star.star-2 {
+                width: 83px;
+                height: 77px;
+                top: 18px;
+                left: 30%;
+            }
+
+            .star.star-3 {
+                width: 74px;
+                height: 70px;
+                top: 115px;
+                left: 40%;
+            }
+
+            .star.star-4 {
+                width: 68px;
+                height: 70px;
+                top: 46px;
+                left: 50%;
+            }
+
+            .star.star-5 {
+                width: 68px;
+                height: 70px;
+                top: 246px;
+                left: 60%;
+            }
+
+            .star.star-6 {
+                width: 68px;
+                height: 70px;
+                top: 346px;
+                left: 70%;
+            }
+
+
+        .slotwrapper {
+            overflow: hidden;
+            display: inline-block;
+            border: 1px solid #000;
+            height: 200px;
+        }
+
+            .slotwrapper ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                position: relative;
+                float: left;
+            }
+
+            .slotwrapper ul {
+                width: 200px;
+                height: 200px;
+                font-size: 200px;
+                line-height: 200px;
+                text-align: center;
+            }
+
+                .slotwrapper ul li img {
+                    vertical-align: top;
+                }
+
+        @media screen and (max-width: 1200px) {
+            .slotwrapper {
+                width: 100%;
+            }
+
+                .slotwrapper ul {
+                    width: 33%;
+                }
+        }
+
+        @media screen and (max-width: 768px) {
+            .slotwrapper {
+                height: 100px;
+            }
+
+                .slotwrapper ul {
+                    height: 100px;
+                    font-size: 100px;
+                    line-height: 100px;
+                }
+        }
+
+        /* Example 10 override slotwrapper */
+        #example10 {
+            height: 150px;
+        }
+
+            #example10 ul {
+                width: 150px;
+                height: 150px;
+                font-size: 150px;
+                line-height: 150px;
+            }
+
+        @media screen and (max-width: 1200px) {
+            #example10 ul {
+                width: 18%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            #example10 {
+                height: 100px;
+            }
+
+                #example10 ul {
+                    height: 100px;
+                    font-size: 100px;
+                    line-height: 100px;
+                }
+        }
     </style>
 </head>
 <body>
@@ -64,50 +193,59 @@
         </div>
     </div>
 
-    <div id="casino">
-        <div class="content">
 
-            <div>
-                <div id="casino1" class="num1 slotMachine" style="margin-left: -65px;">
-                    <div class="slot" name="item1">1</div>
-                    <div class="slot" name="item1">2</div>
-                    <div class="slot" name="item1">3</div>
-                    <div class="slot" name="item1">4</div>
-                    <div class="slot" name="item1">5</div>
-                    <div class="slot" name="item1">6</div>
-                </div>
+    <div class="header">
+        <div class="star star-1"></div>
+        <div class="star star-2"></div>
+        <div class="star star-3"></div>
+        <div class="star star-4"></div>
+        <div class="star star-5"></div>
+        <div class="star star-6"></div>
+    </div>
 
-                <div id="casino2" class="num2 slotMachine">
-                    <div class="slot"  name="item2">1</div>
-                    <div class="slot">2</div>
-                    <div class="slot">3</div>
-                    <div class="slot">4</div>
-                    <div class="slot">5</div>
-                    <div class="slot">6</div>
-                </div>
 
-                <div id="casino3" class="num3 slotMachine">
-                    <div class="slot">1</div>
-                    <div class="slot">2</div>
-                    <div class="slot">3</div>
-                    <div class="slot">4</div>
-                    <div class="slot">5</div>
-                    <div class="slot">6</div>
-                </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Example 2 - Specify numbers</div>
+        <div class="panel-body">
 
-                <div class="btn-group btn-group-justified" role="group">
-                    <button id="casinoShuffle" type="button" class="btn btn-primary btn-lg">Push!</button>
-                </div>
+            <div class="slotwrapper" id="example2">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li class="text-danger">7</li>
+                </ul>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li class="text-danger">7</li>
+                </ul>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li class="text-danger">7</li>
+                </ul>
             </div>
-
+            <button type="button" class="btn btn-success btn-lg" id="btn-example2">Start Spin!</button>
         </div>
-
     </div>
     <!--Script references. -->
     <!--Reference the jQuery library. -->
     <script src="Scripts/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/slotmachine.min.js"></script>
     <!--Reference the SignalR library. -->
     <script src="Scripts/jquery.signalR-2.2.2.min.js"></script>
     <!--Reference the autogenerated SignalR hub script. -->
@@ -115,128 +253,35 @@
     <!--Add script to update the page and send messages.-->
     <script id="codeScript5">
         var lsObject;
-        function napNumber() {
-            var strHtmlNum1 = '';
-            var strHtmlNum2 = '';
-            var strHtmlNum3 = '';
+        var time = 2;
 
-            if (lsObject != null && lsObject.length > 0) {
-                $.each(lsObject, function (idx, itm) {
-                    strHtmlNum1 += '<div class="slot" name="item1" active="' + idx + '">' + itm.number1 + '</div>';
-                    strHtmlNum2 += '<div class="slot" name="item2" active="' + idx + '">' + itm.number2 + '</div>';
-                    strHtmlNum3 += '<div class="slot" name="item3" active="' + idx + '">' + itm.number3 + '</div>';
-                });
-                $casino1 = $('#casino1');
-                $casino2 = $('#casino2');
-                $casino3 = $('#casino3');
+        var sound = new Audio('ringtones/spinning.mp3');
+        var ding = new Audio('ringtones/ding.wav');
+        // Loop of playing sound
+        sound.addEventListener('ended', function () {
+            this.currentTime = 0;
+            this.play();
+        }, false);
 
-                $casino1.html(strHtmlNum1);
-                $casino2.html(strHtmlNum2);
-                $casino3.html(strHtmlNum3);
-                loadCasino();
-            }
-        }
+
 
         function loadCasino() {
-            let count = 0;
-            const btnShuffle = document.querySelector('#casinoShuffle');
-            const btnStop = document.querySelector('#casinoStop');
-            const casino1 = document.querySelector('#casino1');
-            const casino2 = document.querySelector('#casino2');
-            const casino3 = document.querySelector('#casino3');
-            const mCasino1 = new SlotMachine(casino1, {
-                active: 0,
-                delay: 500
-            });
-            const mCasino2 = new SlotMachine(casino2, {
-                active: 1,
-                delay: 500
-            });
-            const mCasino3 = new SlotMachine(casino3, {
-                active: 2,
-                delay: 500
-            });
-
-            btnShuffle.addEventListener('click', () => {
-                count = 3;
-                mCasino1.shuffle(10);
-                mCasino2.shuffle(9999);
-                mCasino3.shuffle(9999);
-                mCasino1.onComplete = function () {
-                    async function f() {
-                        var number1 = $('div[name=item1]').eq(mCasino1.active + 1).text();
-                        var strHtmlNum2 = '';
-                        $casino2 = $('#casino2');
-                        var lsArray = [];
-                        if (lsObject != null && lsObject.length > 0) {
-                            $.each(lsObject, function (idx, itm) {
-                                if (itm.number1 == parseInt(number1)) {
-                                    lsArray.push(itm.number2);
-                                }
-
-                            });
-                            if (lsArray.length < 2) {
-                                $casino2.find('.slot').html(lsArray[0]);
-                            }
-                            else {
-                                $.each(lsArray, function (idx, itm) {
-                                    strHtmlNum2 += '<div class="slot" name="item2" active="' + idx + '">' + itm + '</div>';
-                                });
-                                $casino2.html(strHtmlNum2);
-                            }
-                        }
+            $('#btn-example2').click(function () {
+                sound.play(); // Start play the sound after click button
+                $('#example2 ul').playSpin({
+                    time: 5000,
+                    endNum: [1, 2, 3],
+                    onEnd: function () {
+                        ding.play(); // Play ding after each number is stopped
+                    },
+                    onFinish: function () {
+                        sound.pause(); // To stop the looping sound is pause it
                     }
-                    f().then(mCasino2.shuffle(10));
-                };
-
-                mCasino2.onComplete = function () {
-                    async function f() {
-                        var number1 = $('div[name=item1]').eq(mCasino1.active + 1).text();
-                        var number2 = $('div[name=item2]').eq(mCasino2.active + 1).text();
-                        var strHtmlNum3 = '';
-                        $casino3 = $('#casino3');
-                        var lsArray = [];
-                        if (lsObject != null && lsObject.length > 0) {
-                            $.each(lsObject, function (idx, itm) {
-                                if (itm.number1 == parseInt(number1) && itm.number2 == parseInt(number2)) {
-                                    lsArray.push(itm.number3);
-                                }
-
-                            });
-                            if (lsArray.length < 2) {
-                                $casino3.find('.slot').html(lsArray[0]);
-                            }
-                            else {
-                                $.each(lsArray, function (idx, itm) {
-                                    strHtmlNum3 += '<div class="slot" name="item3" active="' + idx + '">' + itm + '</div>';
-                                });
-                                $casino3.html(strHtmlNum3);
-                              
-                            }
-                        }
-                    }
-                    f().then(mCasino3.shuffle(10));
-                };
-
-
-                mCasino3.onComplete = function () {
-                    var number1 = $('div[name=item1]').eq(mCasino1.active + 1).text();
-                    var number2 = $('div[name=item2]').eq(mCasino2.active + 1).text(); 
-                    var number3 = $('div[name=item3]').eq(mCasino3.active + 1).text();
-
-                    $('#lbLatham').text(number1 + ' - ' + number2 + ' - ' + number3);
-                    $('#popupCongrat').modal('show');
-                    setTimeout(function () {
-                        napNumber();
-                    }, 4000)
-                }
-
-
+                });
             });
-
-
-
         }
+
+
 
     </script>
 
@@ -246,28 +291,9 @@
             $('#popupWelcome').modal('show');
             // Declare a proxy to reference the hub.
             var chat = $.connection.myHub;
-
-            // Create a function that the hub can call to broadcast messages.
-            //chat.client.broadcastMessage = function (name, message) {
-            //    // Html encode display name and message.
-            //    var encodedName = $('<div />').text(name).html();
-            //    var encodedMsg = $('<div />').text(message).html();
-            //    // Add the message to the page.
-            //    $('#discussion').append('<li><strong>' + encodedName
-            //        + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
-            //};
-            //// Get the user name and store it to prepend to messages.
-            //$('#displayname').val(prompt('Enter your name:', ''));
-            //// Set initial focus to message input box.
-            //$('#message').focus();
-            // Start the connection.
-
             chat.client.returnNumber = function (data) {
                 lsObject = JSON.parse(data);
-                //defind list number
-               
-                napNumber();
-              
+                loadCasino();
 
             };
             $.connection.hub.start().done(function () {
@@ -280,7 +306,14 @@
                 //});
             });
 
-          
+            setInterval(function () {
+                $('.star-1').fadeOut(150).delay(2000).fadeIn(300).fadeOut(150).delay(1254);
+                $('.star-2').fadeOut(300).fadeIn(120).fadeOut(120).delay(1920);
+                $('.star-3').fadeOut(150).delay(1200).fadeIn(300).fadeOut(150).delay(800);
+                $('.star-4').fadeOut(700).fadeIn(300).fadeOut(160).delay(1350);
+                $('.star-5').fadeOut(400).fadeIn(300).fadeOut(160).delay(1750);
+                $('.star-6').fadeOut(600).fadeIn(300).fadeOut(160).delay(1450);
+            }, 1);
         });
     </script>
 </body>
