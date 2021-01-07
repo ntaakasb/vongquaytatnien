@@ -24,7 +24,25 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <table id="tbResult">
+                    <thead>
+                        <tr>
+                            <th>Số thứ tự</th>
+                            <th>Thời gian</th>
+                            <th>Mã số trúng thưởng</th>
+                            <th>Công cụ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <!--Script references. -->
     <!--Reference the jQuery library. -->
     <script src="Scripts/jquery-3.4.1.min.js"></script>
@@ -38,24 +56,13 @@
 
     <script type="text/javascript">
         $(function () {
-            // Declare a proxy to reference the hub.
             var chat = $.connection.myHub;
-            // Create a function that the hub can call to broadcast messages.
-            //chat.client.broadcastMessage = function (name, message) {
-            //    // Html encode display name and message.
-            //    var encodedName = $('<div />').text(name).html();
-            //    var encodedMsg = $('<div />').text(message).html();
-            //    // Add the message to the page.
-            //    $('#discussion').append('<li><strong>' + encodedName
-            //        + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
-            //};
-            //// Get the user name and store it to prepend to messages.
-            //$('#displayname').val(prompt('Enter your name:', ''));
-            //// Set initial focus to message input box.
-            //$('#message').focus();
-            // Start the connection.
+            chat.client.broadcastMessage = function (number1, number2, number3, datetime) {
+                var strHtml = "<tr><td>" + number1 + "</td><td>" + number2 + "</td><td>" + number3 + "</td><td>" + datetime + "</td></tr>";
+                $('#tbResult').find('tbody').append(strHtml);
+            };
             $.connection.hub.start().done(function () {
-                chat.server.loadNumber();
+               
                 //$('#sendmessage').click(function () {
                 //    // Call the Send method on the hub.
                 //    chat.server.send($('#displayname').val(), $('#message').val());

@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Result.xml" />
     <Content Include="img\machine.psd" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="dist\jquery.slotmachine.css" />
@@ -170,7 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

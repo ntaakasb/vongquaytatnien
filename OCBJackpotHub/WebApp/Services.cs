@@ -6,10 +6,13 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Web;
 using WebApp.Model;
+using System.Web.SessionState;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace WebApp
 {
-    public class Services : IHttpHandler, System.Web.SessionState.IRequiresSessionState
+    public class Services 
     {
         public string sessionKey = "_OCB_spinner";
 
@@ -57,7 +60,6 @@ namespace WebApp
                         luckyModel.Add(item);
                     }
                 }
-                HttpContext.Current.Session["aaaa"] = "aaa";
                 return luckyModel;
             }
             catch (Exception ex)
@@ -72,9 +74,51 @@ namespace WebApp
             }
         }
 
-        public void ProcessRequest(HttpContext context)
+        public List<int> readResult()
         {
-            throw new NotImplementedException();
+            XmlTextReader textReader = new XmlTextReader("C:\\books.xml");
+            textReader.Read();
+            // If the node has value  
+            while (textReader.Read())
+            {
+                // Move to fist element  
+                textReader.MoveToElement();
+                Console.WriteLine("XmlTextReader Properties Test");
+                Console.WriteLine("===================");
+                // Read this element's properties and display them on console  
+                Console.WriteLine("Name:" + textReader.Name);
+                Console.WriteLine("Base URI:" + textReader.BaseURI);
+                Console.WriteLine("Local Name:" + textReader.LocalName);
+                Console.WriteLine("Attribute Count:" + textReader.AttributeCount.ToString());
+                Console.WriteLine("Depth:" + textReader.Depth.ToString());
+                Console.WriteLine("Line Number:" + textReader.LineNumber.ToString());
+                Console.WriteLine("Node Type:" + textReader.NodeType.ToString());
+                Console.WriteLine("Attribute Count:" + textReader.Value.ToString());
+            }
+            return new List<int>();
+        }
+
+        public void writeResult(int number)
+        {
+            string url = System.Web.HttpContext.Current.Server.MapPath("/Data/Result.xml");
+            XElement xEle = XElement.Load(url);
+            xEle.AddFirst(new XElement("Result",
+                new XElement("Number", number),
+                new XElement("Time", DateTime.Now.ToString()), new XAttribute("id", number)));
+            xEle.Save(url);
+        }
+
+        public void removeResult()
+        {
+            string url = System.Web.HttpContext.Current.Server.MapPath("/Data/Result.xml");
+            var document = XDocument.Load(url);
+            var deleteQuery = document.Element("Results").Elements("Result").Where(x => x.Attribute("id").Value == "288").FirstOrDefault();
+          if(deleteQuery != null)
+            {
+                deleteQuery.Remove();
+                document.Save(url);
+            }
+
         }
     }
 }
