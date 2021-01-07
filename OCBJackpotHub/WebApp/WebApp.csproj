@@ -125,6 +125,7 @@
     <Content Include="img\food2.jpg" />
     <Content Include="img\food3.jpg" />
     <Content Include="img\machine.png" />
+    <Content Include="img\person.png" />
     <Content Include="img\plane.png" />
     <Content Include="img\slot-machine.gif" />
     <Content Include="img\slot1.png" />
@@ -137,6 +138,7 @@
     <Content Include="img\watch.png" />
     <Content Include="control.html" />
     <Content Include="Index.html" />
+    <Content Include="js\jquery.fireworks.js" />
     <Content Include="js\slotmachine.js" />
     <Content Include="js\slotmachine.min.js" />
     <Content Include="ringtones\ding.wav" />

@@ -16,23 +16,56 @@
 
     <style type="text/css">
         .container {
-            background-color: #99CCFF;
+            background-color:#fff;
             border: thick solid #808080;
             padding: 20px;
             margin: 20px;
         }
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+            .styled-table thead tr {
+                background-color: #009879;
+                color: #ffffff;
+                text-align: left;
+            }
+            .styled-table th,
+            .styled-table td {
+                padding: 12px 15px;
+            }
+            .styled-table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+
+                .styled-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .styled-table tbody tr:last-of-type {
+                    border-bottom: 2px solid #009879;
+                }
+                .styled-table tbody tr.active-row {
+                    font-weight: bold;
+                    color: #009879;
+                }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <table id="tbResult">
+                <table id="tbResult" class="styled-table">
                     <thead>
                         <tr>
                             <th>Số thứ tự</th>
-                            <th>Thời gian</th>
+
                             <th>Mã số trúng thưởng</th>
+                            <th>Thời gian</th>
                             <th>Công cụ</th>
                         </tr>
                     </thead>
@@ -40,6 +73,9 @@
 
                     </tbody>
                 </table>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-success btn-lg" id="btn-example2">Quay số!</button>
             </div>
         </div>
     </div>
@@ -58,9 +94,17 @@
         $(function () {
             var chat = $.connection.myHub;
             chat.client.broadcastMessage = function (number1, number2, number3, datetime) {
-                var strHtml = "<tr><td>" + number1 + "</td><td>" + number2 + "</td><td>" + number3 + "</td><td>" + datetime + "</td></tr>";
+                var _index = $('#tbResult').find('tbody tr').length + 1;
+                var strHtml = "<tr><td>" + _index + "</td><td>" + number1 + number2 + number3 + "</td><td>" + datetime + "</td><td>" +'<button type="button" class="btn btn-success btn-lg">Trả lại danh sách quay</button>'+ "</td></tr>";
                 $('#tbResult').find('tbody').append(strHtml);
             };
+            $('#btn-example2').click(function () {
+
+                chat.server.loadNumber();
+
+
+
+            });
             $.connection.hub.start().done(function () {
                
                 //$('#sendmessage').click(function () {
