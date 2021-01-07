@@ -34,7 +34,7 @@ namespace WebApp
                 _item = lsNumber[num];
                 int number = int.Parse(_item.number1.ToString() + _item.number2.ToString() + _item.number3.ToString());
                 //_services.writeResult(number);
-                _services.removeResult();
+                //_services.removeResult();
 
 
                 Clients.All.returnNumber(JsonConvert.SerializeObject(_item));
@@ -50,28 +50,6 @@ namespace WebApp
 
         
 
-        public void editRow()
-        {
-
-            // path to your excel file
-            string path = @"D:\WorkSpace\Project Outsource\slotmachine\vongquaytatnien\OCBJackpotHub\WebApp\dataNumber.xlsx";
-            FileInfo fileInfo = new FileInfo(path);
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            ExcelPackage package = new ExcelPackage(fileInfo);
-            ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
-
-            // get number of rows in the sheet
-            int rows = worksheet.Dimension.Rows; // 10
-
-            // loop through the worksheet rows
-            for (int i = 1; i <= rows; i++)
-            {
-                // replace occurences
-                worksheet.Cells[i, 2].Value = "ABCD";
-            }
-
-            // save changes
-            package.Save();
-        }
+       
     }
 }
