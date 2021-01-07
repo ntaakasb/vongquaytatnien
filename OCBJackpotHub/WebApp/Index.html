@@ -210,13 +210,29 @@
 
             <div class="slotwrapper" id="example2">
                 <ul>
+                    <li>0</li>
                     <li>1</li>
                     <li>2</li>
                     <li>3</li>
                     <li>4</li>
                     <li>5</li>
                     <li>6</li>
-                    <li class="text-danger">7</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+
+                </ul>
+                <ul>
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
                 </ul>
                 <ul>
                     <li>1</li>
@@ -225,16 +241,9 @@
                     <li>4</li>
                     <li>5</li>
                     <li>6</li>
-                    <li class="text-danger">7</li>
-                </ul>
-                <ul>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>6</li>
-                    <li class="text-danger">7</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
                 </ul>
             </div>
             <button type="button" class="btn btn-success btn-lg" id="btn-example2">Start Spin!</button>
@@ -257,6 +266,7 @@
 
         var sound = new Audio('ringtones/spinning.mp3');
         var ding = new Audio('ringtones/ding.wav');
+        var win = new Audio('ringtones/win.mp3');
         // Loop of playing sound
         sound.addEventListener('ended', function () {
             this.currentTime = 0;
@@ -265,21 +275,6 @@
 
 
 
-        function loadCasino() {
-            $('#btn-example2').click(function () {
-                sound.play(); // Start play the sound after click button
-                $('#example2 ul').playSpin({
-                    time: 5000,
-                    endNum: [1, 2, 3],
-                    onEnd: function () {
-                        ding.play(); // Play ding after each number is stopped
-                    },
-                    onFinish: function () {
-                        sound.pause(); // To stop the looping sound is pause it
-                    }
-                });
-            });
-        }
 
 
 
@@ -291,13 +286,38 @@
             $('#popupWelcome').modal('show');
             // Declare a proxy to reference the hub.
             var chat = $.connection.myHub;
+          
             chat.client.returnNumber = function (data) {
+                sound.play(); // Start play the sound after click button
                 lsObject = JSON.parse(data);
-                loadCasino();
+                console.log(data);
+                var no1 = lsObject.number1 + 1;
+                var no2 = lsObject.number2 + 1;
+                var no3 = lsObject.number3;
+                $('#example2 ul').playSpin({
+                    time: 2000,
+                    endNum: [no1, no2, no3],
+                    stopSeq: 'leftToRight',
+                    onEnd: function () {
+                        ding.play(); // Play ding after each number is stopped
+                    },
+                    onFinish: function () {
+                        sound.pause(); // To stop the looping sound is pause it
+                        win.play();
+                        chat.server.send(lsObject.number1, lsObject.number2 , no3);
+                    }
+                });
 
             };
-            $.connection.hub.start().done(function () {
+            $('#btn-example2').click(function () {
+              
                 chat.server.loadNumber();
+
+                
+               
+            });
+
+            $.connection.hub.start().done(function () {
                 //$('#sendmessage').click(function () {
                 //    // Call the Send method on the hub.
                 //    chat.server.send($('#displayname').val(), $('#message').val());

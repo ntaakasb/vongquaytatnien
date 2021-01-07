@@ -30,14 +30,22 @@ namespace WebApp
             {
                 Random r = new Random();
                 int num = r.Next(0, lsNumber.Count);
+                LuckyNumber _item = new LuckyNumber();
+                _item = lsNumber[num];
+                int number = int.Parse(_item.number1.ToString() + _item.number2.ToString() + _item.number3.ToString());
+                //_services.writeResult(number);
+                _services.removeResult();
+
+
+                Clients.All.returnNumber(JsonConvert.SerializeObject(_item));
             }
 
-            Clients.All.returnNumber(JsonConvert.SerializeObject(lsNumber));
+            
         }
-        public void Send(string name, string message)
+        public void Send(int number1, int number2, int number3)
         {
             // Call the broadcastMessage method to update clients.
-            Clients.All.broadcastMessage(name, message);
+            Clients.All.broadcastMessage(number1, number2, number3, DateTime.Now.ToString());
         }
 
         
