@@ -1,0 +1,272 @@
+﻿
+<html>
+<head>
+    <title>SignalR Simple Chat</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/dist/jquery.slotmachine.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="/dist/slotmachine.js"></script>
+    <script src="/dist/jquery.slotmachine.js"></script>
+
+
+
+
+    <style type="text/css">
+        .container {
+            background-color: #99CCFF;
+            border: thick solid #808080;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .popupCustom {
+            max-width: 1000px;
+            font-size: 3rem;
+            /* padding: 2rem 3rem; */
+            text-align: center;
+        }
+
+            .popupCustom .modal-body {
+                padding: 10rem 9rem;
+            }
+
+
+        .star {
+            position: absolute;
+            background: url(https://mtedwards.s3.amazonaws.com/sparkle.png) no-repeat;
+            background-size: contain;
+            overflow: hidden;
+        }
+
+            .star.star-1 {
+                width: 50px;
+                height: 34px;
+                top: 110px;
+                left: 20%;
+            }
+
+            .star.star-2 {
+                width: 83px;
+                height: 77px;
+                top: 18px;
+                left: 30%;
+            }
+
+            .star.star-3 {
+                width: 74px;
+                height: 70px;
+                top: 115px;
+                left: 40%;
+            }
+
+            .star.star-4 {
+                width: 68px;
+                height: 70px;
+                top: 46px;
+                left: 50%;
+            }
+
+            .star.star-5 {
+                width: 68px;
+                height: 70px;
+                top: 246px;
+                left: 60%;
+            }
+            .star.star-6 {
+                width: 68px;
+                height: 70px;
+                top: 346px;
+                left: 70%;
+            }
+    </style>
+</head>
+<body>
+    <!-- Button to Open the Modal -->
+    <!-- The Modal -->
+    <div class="modal" id="popupWelcome">
+        <div class="modal-dialog modal-lg popupCustom">
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    CHÀO MỪNG BẠN ĐẾN VỚI OCB JACKPOT
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="popupCongrat">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <h2>CHÚC MỪNG CHỦ NHÂN CỦA LÁ THĂM</h2>
+                    <label id="lbLatham"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="header">
+        <div class="star star-1"></div>
+        <div class="star star-2"></div>
+        <div class="star star-3"></div>
+        <div class="star star-4"></div>
+        <div class="star star-5"></div>
+        <div class="star star-6"></div>
+    </div>
+
+
+    <div id="casino">
+        <div class="content">
+
+            <div>
+                <div id="casino1" class="num1 slotMachine" style="margin-left: -65px;">
+                    <div class="slot" name="item1">0</div>
+                    <div class="slot" name="item1">1</div>
+                    <div class="slot" name="item1">2</div>
+
+                </div>
+
+                <div id="casino2" class="num2 slotMachine">
+                    <div class="slot" name="item1">0</div>
+                    <div class="slot" name="item2">1</div>
+                    <div class="slot" name="item2">2</div>
+                    <div class="slot" name="item2">3</div>
+                    <div class="slot" name="item2">4</div>
+                    <div class="slot" name="item2">5</div>
+                    <div class="slot" name="item2">6</div>
+                    <div class="slot" name="item2">7</div>
+                    <div class="slot" name="item2">8</div>
+                    <div class="slot" name="item2">9</div>
+                </div>
+
+                <div id="casino3" class="num3 slotMachine">
+                    <div class="slot" name="item3">1</div>
+                    <div class="slot" name="item3">2</div>
+                    <div class="slot" name="item3">3</div>
+                    <div class="slot" name="item3">4</div>
+                    <div class="slot" name="item3">5</div>
+                    <div class="slot" name="item3">6</div>
+                    <div class="slot" name="item3">7</div>
+                    <div class="slot" name="item3">8</div>
+                    <div class="slot" name="item3">9</div>
+                </div>
+
+                <div class="btn-group btn-group-justified" role="group">
+                    <button id="casinoShuffle" type="button" class="btn btn-primary btn-lg">Push!</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!--Script references. -->
+    <!--Reference the jQuery library. -->
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--Reference the SignalR library. -->
+    <script src="Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="signalr/hubs"></script>
+    <!--Add script to update the page and send messages.-->
+    <script id="codeScript5">
+        var lsObject;
+        var time = 2;
+
+        function napNumber() {
+            var strHtmlNum1 = '';
+            var strHtmlNum2 = '';
+            var strHtmlNum3 = '';
+
+            if (lsObject != null && lsObject.length > 0) {
+                $.each(lsObject, function (idx, itm) {
+                    strHtmlNum1 += '<div class="slot" name="item1" active="' + idx + '">' + itm.number1 + '</div>';
+                    strHtmlNum2 += '<div class="slot" name="item2" active="' + idx + '">' + itm.number2 + '</div>';
+                    strHtmlNum3 += '<div class="slot" name="item3" active="' + idx + '">' + itm.number3 + '</div>';
+                });
+                $casino1 = $('#casino1');
+                $casino2 = $('#casino2');
+                $casino3 = $('#casino3');
+
+                $casino1.html(strHtmlNum1);
+                $casino2.html(strHtmlNum2);
+                $casino3.html(strHtmlNum3);
+
+            }
+        }
+
+        function loadCasino() {
+            const btnShuffle = document.querySelector('#casinoShuffle');
+            const casino1 = document.querySelector('#casino1');
+            const casino2 = document.querySelector('#casino2');
+            const casino3 = document.querySelector('#casino3');
+            const mCasino1 = new SlotMachine(casino1, {
+                active: 0,
+                delay: 500
+            });
+            const mCasino2 = new SlotMachine(casino2, {
+                active: 1,
+                delay: 500
+            });
+            const mCasino3 = new SlotMachine(casino3, {
+                active: 2,
+                delay: 500
+            });
+            btnShuffle.addEventListener('click', () => {
+                count = 3;
+                mCasino1.shuffle(10);
+                mCasino2.shuffle(20);
+                mCasino3.shuffle(30);
+
+               // mCasino2.changeSettings({ randomize: function () { return 0; } })
+            });
+
+        }
+
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('#popupWelcome').modal('show');
+            // Declare a proxy to reference the hub.
+            var chat = $.connection.myHub;
+            chat.client.returnNumber = function (data) {
+                lsObject = JSON.parse(data);
+                napNumber();
+                loadCasino();
+
+            };
+            $.connection.hub.start().done(function () {
+                chat.server.loadNumber();
+                //$('#sendmessage').click(function () {
+                //    // Call the Send method on the hub.
+                //    chat.server.send($('#displayname').val(), $('#message').val());
+                //    // Clear text box and reset focus for next comment.
+                //    $('#message').val('').focus();
+                //});
+            });
+
+            setInterval(function () {
+                $('.star-1').fadeOut(150).delay(2000).fadeIn(300).fadeOut(150).delay(1254);
+                $('.star-2').fadeOut(300).fadeIn(120).fadeOut(120).delay(1920);
+                $('.star-3').fadeOut(150).delay(1200).fadeIn(300).fadeOut(150).delay(800);
+                $('.star-4').fadeOut(700).fadeIn(300).fadeOut(160).delay(1350);
+                $('.star-5').fadeOut(400).fadeIn(300).fadeOut(160).delay(1750);
+                $('.star-6').fadeOut(600).fadeIn(300).fadeOut(160).delay(1450);
+            }, 1);
+        });
+    </script>
+</body>
+</html>
