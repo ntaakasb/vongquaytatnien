@@ -93,42 +93,56 @@
     <script type="text/javascript">
         $(function () {
             var chat = $.connection.myHub;
-            async function f() {
-                chat.client.broadcastMessage = function (number, datetime) {
-                    var _index = $('#tbResult').find('tbody tr').length + 1;
-                    var strHtml = "<tr><td>" + _index + "</td><td>" + number + "</td><td>" + datetime + "</td><td>" + '<button name="removeRow" data-id="' + number + '" type="button" class="btn btn-success btn-lg">Trả lại danh sách quay</button>' + "</td></tr>";
-                    $('#tbResult').find('tbody').append(strHtml);
-                };
-            }
+            chat.client.broadcastMessage = function (number, datetime) {
+                var _index = $('#tbResult').find('tbody tr').length + 1;
+                var strHtml = "<tr><td>" + _index + "</td><td>" + number + "</td><td>" + datetime + "</td><td>" + '<button name="removeRow" data-id="' + number + '" type="button" class="btn btn-success btn-lg">Trả lại danh sách quay</button>' + "</td></tr>";
+                $('#tbResult').find('tbody').append(strHtml);
+                $('window').on('click', 'button[name=removeRow]', removeRow);
+            };
 
-            f().then(function () {
-                $('button[name=removeRow]').click(function () {
-                    var id = $(this).attr('data-id');
-                    chat.server.returnList(id);
-                })
-            }); // 1
-           
+            chat.client.loadAllResult = function (data) {
+                var lsObject = JSON.parse(data);
+                if (lsObject != null && lsObject.length > 0) {
+                    var i = 0;
+                    var strHtml = '';
+                    $.each(lsObject, function (idx, itm) {
+                        i++;
+                        strHtml += "<tr><td>" + i + "</td><td>" + itm.number + "</td><td>" + itm.CreatedDate + "</td><td>" + '<button onclick="removeRow(this)" name="removeRow" data-id="' + itm.number + '" type="button" class="btn btn-success btn-lg">Trả lại danh sách quay</button>' + "</td></tr>";
+                    })
+                    $('#tbResult').find('tbody').html(strHtml);
+                   
+                }
+
+            };
+
             $('#btn-example2').click(function () {
 
                 chat.server.loadNumber();
             });
             $.connection.hub.start().done(function () {
                 chat.server.loadAll();
-                
-                $('button[name=removeRow]').click(function () {
-                    var id = $(this).attr('data-id');
-                    chat.server.returnList(id);
-                })
+
                 
             });
 
          
 
-            function removeRow() {
-                chat.server.returnList(5);
-            }
             
         });
+        function removeRow(_this) {
+            var elm = $(_this);
+            if (confirm("Bạn có muốn xóa!")) {
+                var chat = $.connection.myHub;
+                var id = elm.attr('data-id');
+                chat.server.returnList(id);
+                elm.closest('tr').remove();
+                alert('Xóa thành công');
+            } else {
+
+            }
+
+          
+        }
 
       
     </script>

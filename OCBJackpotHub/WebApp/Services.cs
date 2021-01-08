@@ -110,13 +110,20 @@ namespace WebApp
 
         public void removeResult(string id)
         {
-            string url = System.Web.HttpContext.Current.Server.MapPath("/Data/Result.xml");
-            var document = XDocument.Load(url);
-            var deleteQuery = document.Element("Results").Elements("Result").Where(x => x.Attribute("id").Value == id.Trim()).FirstOrDefault();
-          if(deleteQuery != null)
+            try
             {
-                deleteQuery.Remove();
-                document.Save(url);
+                string url = System.Web.HttpContext.Current.Server.MapPath("/Data/Result.xml");
+                var document = XDocument.Load(url);
+                var deleteQuery = document.Element("Results").Elements("Result").Where(x => x.Attribute("id").Value == id.Trim()).FirstOrDefault();
+                if (deleteQuery != null)
+                {
+                    deleteQuery.Remove();
+                    document.Save(url);
+                }
+            }
+          catch(Exception ex)
+            {
+
             }
 
         }

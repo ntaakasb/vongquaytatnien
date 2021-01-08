@@ -67,11 +67,8 @@ namespace WebApp
             var lsResult = _services.getAllResult();
             if(lsResult != null && lsResult.Any())
             {
-                foreach(var item in lsResult)
-                {
-                    Clients.All.broadcastMessage(item.number, DateTime.Now.ToString());
-                }
-                
+                Clients.All.loadAllResult(JsonConvert.SerializeObject(lsResult));
+
             }
           
         }
