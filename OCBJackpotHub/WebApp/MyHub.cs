@@ -32,24 +32,55 @@ namespace WebApp
                 int num = r.Next(0, lsNumber.Count);
                 LuckyNumber _item = new LuckyNumber();
                 _item = lsNumber[num];
-                int number = int.Parse(_item.number1.ToString() + _item.number2.ToString() + _item.number3.ToString());
-                //_services.writeResult(number);
-                //_services.removeResult();
+                string number =_item.number1.ToString() + _item.number2.ToString() + _item.number3.ToString();
+               
+               
+                var lsResult = _services.getAllResult();
+                if(lsResult != null && lsResult.Any())
+                {
+                    bool isExits = false;
+                    isExits = lsResult.Any(x => x.number == number.Trim());
+                    while (isExits)
+                    {
+                        num = r.Next(0, lsNumber.Count);
+                        isExits = lsResult.Any(x => x.number == number.Trim());
+                    }
 
+                    _item = lsNumber[num];
+                }
 
+                _services.writeResult(number);
                 Clients.All.returnNumber(JsonConvert.SerializeObject(_item));
             }
 
             
         }
-        public void Send(int number1, int number2, int number3)
+        public void Send(string number)
         {
             // Call the broadcastMessage method to update clients.
-            Clients.All.broadcastMessage(number1, number2, number3, DateTime.Now.ToString());
+            Clients.All.broadcastMessage(number, DateTime.Now.ToString());
         }
 
-        
+        public void LoadAll()
+        {
+            Services _services = new Services();
+            var lsResult = _services.getAllResult();
+            if(lsResult != null && lsResult.Any())
+            {
+                foreach(var item in lsResult)
+                {
+                    Clients.All.broadcastMessage(item.number, DateTime.Now.ToString());
+                }
+                
+            }
+          
+        }
 
-       
+        public void ReturnList(string number)
+        {
+            Services _services = new Services();
+            _services.removeResult(number);
+        }
+
     }
 }

@@ -93,28 +93,44 @@
     <script type="text/javascript">
         $(function () {
             var chat = $.connection.myHub;
-            chat.client.broadcastMessage = function (number1, number2, number3, datetime) {
-                var _index = $('#tbResult').find('tbody tr').length + 1;
-                var strHtml = "<tr><td>" + _index + "</td><td>" + number1 + number2 + number3 + "</td><td>" + datetime + "</td><td>" +'<button type="button" class="btn btn-success btn-lg">Trả lại danh sách quay</button>'+ "</td></tr>";
-                $('#tbResult').find('tbody').append(strHtml);
-            };
+            async function f() {
+                chat.client.broadcastMessage = function (number, datetime) {
+                    var _index = $('#tbResult').find('tbody tr').length + 1;
+                    var strHtml = "<tr><td>" + _index + "</td><td>" + number + "</td><td>" + datetime + "</td><td>" + '<button name="removeRow" data-id="' + number + '" type="button" class="btn btn-success btn-lg">Trả lại danh sách quay</button>' + "</td></tr>";
+                    $('#tbResult').find('tbody').append(strHtml);
+                };
+            }
+
+            f().then(function () {
+                $('button[name=removeRow]').click(function () {
+                    var id = $(this).attr('data-id');
+                    chat.server.returnList(id);
+                })
+            }); // 1
+           
             $('#btn-example2').click(function () {
 
                 chat.server.loadNumber();
-
-
-
             });
             $.connection.hub.start().done(function () {
-               
-                //$('#sendmessage').click(function () {
-                //    // Call the Send method on the hub.
-                //    chat.server.send($('#displayname').val(), $('#message').val());
-                //    // Clear text box and reset focus for next comment.
-                //    $('#message').val('').focus();
-                //});
+                chat.server.loadAll();
+                
+                $('button[name=removeRow]').click(function () {
+                    var id = $(this).attr('data-id');
+                    chat.server.returnList(id);
+                })
+                
             });
+
+         
+
+            function removeRow() {
+                chat.server.returnList(5);
+            }
+            
         });
+
+      
     </script>
 </body>
 </html>

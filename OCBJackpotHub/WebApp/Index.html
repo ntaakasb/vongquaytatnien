@@ -314,7 +314,8 @@
                             sound.pause(); // To stop the looping sound is pause it
                             win.play();
                             $('#summonFireworks').click();
-                            chat.server.send(lsObject.number1, lsObject.number2, lsObject.number3);
+                            var number = lsObject.number1.toString() +  lsObject.number2.toString() + lsObject.number3.toString();
+                            chat.server.send(number);
                         }
                     });
 

@@ -98,7 +98,7 @@ namespace WebApp
             return new List<int>();
         }
 
-        public void writeResult(int number)
+        public void writeResult(string number)
         {
             string url = System.Web.HttpContext.Current.Server.MapPath("/Data/Result.xml");
             XElement xEle = XElement.Load(url);
@@ -108,17 +108,33 @@ namespace WebApp
             xEle.Save(url);
         }
 
-        public void removeResult()
+        public void removeResult(string id)
         {
             string url = System.Web.HttpContext.Current.Server.MapPath("/Data/Result.xml");
             var document = XDocument.Load(url);
-            var deleteQuery = document.Element("Results").Elements("Result").Where(x => x.Attribute("id").Value == "288").FirstOrDefault();
+            var deleteQuery = document.Element("Results").Elements("Result").Where(x => x.Attribute("id").Value == id.Trim()).FirstOrDefault();
           if(deleteQuery != null)
             {
                 deleteQuery.Remove();
                 document.Save(url);
             }
 
+        }
+
+        public List<ResultModel> getAllResult()
+        {
+            string url = System.Web.HttpContext.Current.Server.MapPath("/Data/Result.xml");
+            XDocument doc = XDocument.Load(url);
+            List<ResultModel> lsResult = new List<ResultModel>();
+            var elements = from xEle in doc.Descendants("Result") select xEle;
+            foreach (XElement result in elements)
+            {
+                ResultModel item = new ResultModel();
+                item.number = result.Element("Number").Value;
+                item.CreatedDate = result.Element("Time").Value;
+                lsResult.Add(item);
+            }
+            return lsResult;
         }
     }
 }
