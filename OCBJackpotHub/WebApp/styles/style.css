@@ -51,9 +51,10 @@ body {
 
 .app {
     position: absolute;
-    bottom: 0;
-    right: 40%;
+    /* bottom: 0; */
+    right: 10%;
     width: 21%;
+    top: 0;
 }
 
 .modal-content {
