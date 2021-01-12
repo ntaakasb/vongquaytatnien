@@ -162,32 +162,30 @@
             z-index: 9999999999999999;
         }
 
-        .button {
-            padding: 40px 42px;
-            font-size: 24px;
-            text-align: center;
-            cursor: pointer;
-            outline: none;
-            color: #fff;
+        .row-button{
             position: absolute;
-            /* margin: 30%; */
-            bottom: 10;
-            margin-left: 47%;
-            border-radius: 50%;
-            background-image: radial-gradient(#006f1e, #014523, #012b13);
-            border: 1px solid #176d3c;
-            box-shadow: 0 9px #999;
+            bottom: 0;
+            width: 100%;
+        }
+        .cover-btn {
+            background: url(img/bg-button.png);
+            background-repeat: no-repeat;
+            background-position: center 8rem;
+            padding-top: 45px;
+        }
+            .cover-btn img {
+                cursor: pointer;
+                margin-top: 100px;
+            }
+        /*.btn-click:hover {
+            opacity: 0.8;
+        }*/
+        .btn-click:active {
+            opacity: 0.5;
+            margin-top: 105px;
         }
 
-            .button:hover {
-                background-color: #3e8e41
-            }
 
-            .button:active {
-                background-color: #3e8e41;
-                box-shadow: 0 5px #666;
-                transform: translateY(4px);
-            }
     </style>
 </head>
 <body>
@@ -198,7 +196,11 @@
             <div class="modal-content">
                 <!-- Modal body -->
                 <div class="modal-body">
-                    CHÀO MỪNG BẠN ĐẾN VỚI OCB JACKPOT
+                    <video width="800" controls>
+                        <source src="img/intro.mp4" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+
                 </div>
             </div>
         </div>
@@ -283,8 +285,14 @@
         <button id="summonFireworks" style="display: none;">Summon</button>
         <button id="destroyFireworks" style="display: none;">Destroy</button>
     </div>
+    <div class="row row-button">
+        <div class="text-center" style="width: 100%;">
+            <div class="cover-btn">
+                <img id="clkDraw" class="btn-click" src="img/button.png" />
+            </div>
+        </div>
+    </div>
 
-    <button class="button">CLICK</button>
 
     <!--Script references. -->
     <!--Reference the jQuery library. -->
@@ -305,6 +313,7 @@
         var sound = new Audio('ringtones/spinning.mp3');
         var ding = new Audio('ringtones/ding.wav');
         var win = new Audio('ringtones/win.mp3');
+        var introvideo = new HTMLVideoElement('img/intro.mp4')
         // Loop of playing sound
         sound.addEventListener('ended', function () {
             this.currentTime = 0;
@@ -350,7 +359,7 @@
                 });
 
             };
-
+      
 
             $.connection.hub.start().done(function () {
                 //$('#sendmessage').click(function () {
@@ -359,6 +368,9 @@
                 //    // Clear text box and reset focus for next comment.
                 //    $('#message').val('').focus();
                 //});
+                $('#clkDraw').click(function () {
+                    chat.server.loadNumber();
+                });
             });
 
             setInterval(function () {
@@ -384,6 +396,8 @@
                 $('.congrat').hide();
                 $("#example").fireworks('destroy');
             });
+
+
         });
 
         /*
