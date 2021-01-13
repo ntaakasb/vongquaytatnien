@@ -25,11 +25,12 @@ body {
 }
 
 .slotwrapper {
+    padding-left: 59px;
     overflow: hidden;
     display: inline-block;
-    border: 1px solid #f7eb82;
-    height: 175px;
-    background: #6a8a772e;
+    height: 200px;
+    background: url(/img/khungquay.png) no-repeat;
+    width: 745px;
 }
     .slotwrapper ul {
         width: 215px;
