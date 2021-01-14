@@ -79,5 +79,10 @@ namespace WebApp
             _services.removeResult(number);
         }
 
+        public void DirectPage()
+        {
+            Clients.All.loadPage();
+        }
+
     }
 }

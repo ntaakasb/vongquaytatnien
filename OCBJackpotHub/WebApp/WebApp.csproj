@@ -110,6 +110,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\bgwelcome.jpg" />
+    <Content Include="img\logo-full.png" />
+    <Content Include="js\jquery-3.4.1.min.js" />
+    <Content Include="js\jquery.buoyant.min.js" />
+    <Content Include="index.html" />
     <Content Include="Data\Result.xml" />
     <Content Include="favicon.ico" />
     <Content Include="img\app.png" />
@@ -138,7 +143,7 @@
     <Content Include="img\phone.psd" />
     <Content Include="img\popup.psd" />
     <Content Include="img\top-logo.png" />
-    <Content Include="Index.html" />
+    <Content Include="draw.html" />
     <Content Include="js\jquery.fireworks.js" />
     <Content Include="js\slotmachine.js" />
     <Content Include="js\slotmachine.min.js" />

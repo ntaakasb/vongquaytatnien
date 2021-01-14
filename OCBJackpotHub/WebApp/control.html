@@ -1,7 +1,7 @@
 ﻿
 <html>
 <head>
-    <title>SignalR Simple Chat</title>
+    <title>Khối Công Nghệ Jackpot</title>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -16,11 +16,12 @@
 
     <style type="text/css">
         .container {
-            background-color:#fff;
+            background-color: #fff;
             border: thick solid #808080;
             padding: 20px;
             margin: 20px;
         }
+
         .styled-table {
             border-collapse: collapse;
             margin: 25px 0;
@@ -29,15 +30,18 @@
             min-width: 400px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
+
             .styled-table thead tr {
                 background-color: #009879;
                 color: #ffffff;
                 text-align: left;
             }
+
             .styled-table th,
             .styled-table td {
                 padding: 12px 15px;
             }
+
             .styled-table tbody tr {
                 border-bottom: 1px solid #dddddd;
             }
@@ -49,6 +53,7 @@
                 .styled-table tbody tr:last-of-type {
                     border-bottom: 2px solid #009879;
                 }
+
                 .styled-table tbody tr.active-row {
                     font-weight: bold;
                     color: #009879;
@@ -74,7 +79,9 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="col-md-4">
+                <button id="btnGodraw" class="btn btn-primay">CHUYỂN ĐẾN TRANG QUAY</button>
+            </div>
         </div>
     </div>
     <!--Script references. -->
@@ -117,7 +124,9 @@
             $.connection.hub.start().done(function () {
                 chat.server.loadAll();
 
-                
+                $('#btnGodraw').click(function () {
+                    chat.server.directPage();
+                })
             });
 
          

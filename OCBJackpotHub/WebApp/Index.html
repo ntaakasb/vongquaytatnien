@@ -1,718 +1,166 @@
-﻿
-<html>
+﻿<!DOCTYPE html>
+<html lang="en" style="background: url('/img/bgwelcome.jpg') no-repeat; background-position: 0 50%;">
+
 <head>
-    <title>SignalR Simple Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Khối Công Nghệ Jackpot</title>
 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-
-    <link rel="stylesheet" href="/styles/style.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="/dist/jquery.slotmachine.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-
-
-
-
-
-    <style type="text/css">
-        .container {
-            background-color: #99CCFF;
-            border: thick solid #808080;
-            padding: 20px;
-            margin: 20px;
-        }
-
-        .popupCustom {
-            max-width: 1000px;
-            font-size: 3rem;
-            /* padding: 2rem 3rem; */
-            text-align: center;
-        }
-
-            .popupCustom .modal-body {
-                padding: 10rem 9rem;
-            }
-
-
-        .star {
-            position: absolute;
-            background: url(https://mtedwards.s3.amazonaws.com/sparkle.png) no-repeat;
-            background-size: contain;
-            overflow: hidden;
-        }
-
-            .star.star-1 {
-                width: 50px;
-                height: 34px;
-                top: 110px;
-                left: 20%;
-            }
-
-            .star.star-2 {
-                width: 83px;
-                height: 77px;
-                top: 18px;
-                left: 30%;
-            }
-
-            .star.star-3 {
-                width: 74px;
-                height: 70px;
-                top: 115px;
-                left: 40%;
-            }
-
-            .star.star-4 {
-                width: 68px;
-                height: 70px;
-                top: 46px;
-                left: 50%;
-            }
-
-            .star.star-5 {
-                width: 68px;
-                height: 70px;
-                top: 246px;
-                left: 60%;
-            }
-
-            .star.star-6 {
-                width: 68px;
-                height: 70px;
-                top: 346px;
-                left: 70%;
-            }
-
-
-        .slotwrapper {
-            overflow: hidden;
-            display: inline-block;
-            height: 200px;
-        }
-
-            .slotwrapper ul {
-                padding: 0;
-                margin: 0;
-                list-style: none;
-                position: relative;
-                float: left;
-            }
-
-
-                .slotwrapper ul li img {
-                    vertical-align: top;
-                }
-
-        @media screen and (max-width: 1200px) {
-            .slotwrapper {
-                width: 100%;
-            }
-
-                .slotwrapper ul {
-                    width: 33%;
-                }
-        }
-
-        @media screen and (max-width: 768px) {
-            .slotwrapper {
-                height: 100px;
-            }
-
-                .slotwrapper ul {
-                    height: 100px;
-                    font-size: 100px;
-                    line-height: 100px;
-                }
-        }
-
-        /* Example 10 override slotwrapper */
-        #example10 {
-            height: 150px;
-        }
-
-            #example10 ul {
-                width: 150px;
-                height: 150px;
-                font-size: 150px;
-                line-height: 150px;
-            }
-
-        @media screen and (max-width: 1200px) {
-            #example10 ul {
-                width: 18%;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            #example10 {
-                height: 100px;
-            }
-
-                #example10 ul {
-                    height: 100px;
-                    font-size: 100px;
-                    line-height: 100px;
-                }
-        }
-
-        #fireworksField {
-            z-index: 9999999999999999;
-        }
-
-        .row-button{
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-        .cover-btn {
-            background: url(img/bg-button.png);
-            background-repeat: no-repeat;
-            background-position: center 8rem;
-            padding-top: 45px;
-        }
-            .cover-btn img {
-                cursor: pointer;
-                margin-top: 100px;
-            }
-        /*.btn-click:hover {
-            opacity: 0.8;
-        }*/
-        .btn-click:active {
-            opacity: 0.5;
-            margin-top: 105px;
-        }
-        .top-header{
-            width: 100%;
-        }
-
-        .top-header img {
-            margin: 0 auto;
-            margin-top: 2rem;
-        }
-
-    </style>
 </head>
+
 <body>
-    <!-- Button to Open the Modal -->
-    <!-- The Modal -->
-    <div class="modal" id="popupWelcome">
-        <div class="modal-dialog modal-lg popupCustom">
-            <div class="modal-content">
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <video width="800" controls>
-                        <source src="img/intro.mp4" type="video/mp4">
-                        Your browser does not support HTML video.
-                    </video>
+    <style>
+        /* cyrillic-ext */
+        @font-face {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+            unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+        /* cyrillic */
+        @font-face {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+        }
+        /* vietnamese */
+        @font-face {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+            unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+        }
+        /* latin-ext */
+        @font-face {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+            unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        /* latin */
+        @font-face {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
 
-                </div>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #carbonads a {
+            color: #fff;
+            text-decoration: none
+        }
+
+            #carbonads a:hover {
+                color: #fff
+            }
+
+        .circles {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem 0;
+        }
+
+
+        .board {
+            text-align: center;
+            border-radius: 4px;
+            width: 900px;
+            margin: 50px auto 0 auto;
+            padding: 20px;
+        }
+
+            .board > #vacancy {
+                font-size: 70px;
+                font-family: 'Montserrat', cursive;
+                color: #a1fb42;
+                text-transform: uppercase;
+            }
+
+
+            .board > #no {
+                color: #fff;
+                font-size: 50px;
+                font-family: 'Montserrat', cursive;
+            }
+
+        p {
+            margin: 2rem;
+        }
+    </style>
+    <div class="wrapper">
+        <div class="board">
+            <div class="logo">
+                <img src="img/logo-full.png" />
             </div>
+            <p id="no">Chào mừng bạn đến với</p>
+            <p id="vacancy">Khối công nghệ JACKPOT</p>
         </div>
+        <div id="carbon-block" style="margin:30px auto"></div>
+
     </div>
 
-    <div class="modal" id="popupCongrat">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <h2>CHÚC MỪNG CHỦ NHÂN CỦA LÁ THĂM</h2>
-                    <label id="lbLatham"></label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="header">
-        <div class="star star-1"></div>
-        <div class="star star-2"></div>
-        <div class="star star-3"></div>
-        <div class="star star-4"></div>
-        <div class="star star-5"></div>
-        <div class="star star-6"></div>
-    </div>
-
-    <div class="main">
-        <div class="row top-header">
-            <img src="img/top-logo.png" />
-        </div>
-
-        <div class="panel panel-primary">
-            <div class="panel-body">
-
-                <div class="slotwrapper" id="example2">
-                    <ul>
-                        <li>0</li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li>7</li>
-                        <li>8</li>
-                        <li>9</li>
-
-                    </ul>
-                    <ul>
-                        <li>0</li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li>7</li>
-                        <li>8</li>
-                        <li>9</li>
-                    </ul>
-                    <ul>
-                        <li>0</li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li>7</li>
-                        <li>8</li>
-                        <li>9</li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <!--<img class="person" src="img/person.png" />-->
-        <img class="phone-omni" src="img/phone-omni.png" />
-        <img class="congrat" src="img/congrat.gif" />
-    </div>
-    <div id="example" align="center" style="width: 100%; height: 100%;">
-        <button id="summonFireworks" style="display: none;">Summon</button>
-        <button id="destroyFireworks" style="display: none;">Destroy</button>
-    </div>
-    <div class="row row-button">
-        <div class="text-center" style="width: 100%;">
-            <div class="cover-btn">
-                <img id="clkDraw" class="btn-click" src="img/button.png" />
-            </div>
-        </div>
-    </div>
-
-
-    <!--Script references. -->
-    <!--Reference the jQuery library. -->
-    <script src="Scripts/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/slotmachine.min.js"></script>
-    <!--Reference the SignalR library. -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery.buoyant.min.js"></script>
     <script src="Scripts/jquery.signalR-2.2.2.min.js"></script>
     <!--Reference the autogenerated SignalR hub script. -->
     <script src="signalr/hubs"></script>
-    <script src="js/jquery.fireworks.js"></script>
-    <!--Add script to update the page and send messages.-->
-    <script id="codeScript5">
-        var lsObject;
-        var time = 2;
-
-        var sound = new Audio('ringtones/spinning.mp3');
-        var ding = new Audio('ringtones/ding.wav');
-        var win = new Audio('ringtones/win.mp3');
-        // Loop of playing sound
-        sound.addEventListener('ended', function () {
-            this.currentTime = 0;
-            this.play();
-        }, false);
-
-
-
-
-
-
-    </script>
-
-
-    <script type="text/javascript">
-        $(function () {
-            $('#popupWelcome').modal('show');
-            // Declare a proxy to reference the hub.
-            var chat = $.connection.myHub;
-
-            chat.client.returnNumber = function (data) {
-                sound.play(); // Start play the sound after click button
-                lsObject = JSON.parse(data);
-                console.log(data);
-                var no1 = lsObject.number1 + 1;
-                var no2 = lsObject.number2 + 1;
-                var no3 = lsObject.number3 + 1;
-                $('#destroyFireworks').click();
-                $('#example2 ul').playSpin({
-                    time: 3000,
-                    endNum: [no1, no2, no3],
-                    stopSeq: 'leftToRight',
-                    onEnd: function () {
-                        ding.play(); // Play ding after each number is stopped
-                    },
-                    onFinish: function () {
-                        sound.pause(); // To stop the looping sound is pause it
-                        win.play();
-                        $('#summonFireworks').click();
-                        var number = lsObject.number1.toString() + lsObject.number2.toString() + lsObject.number3.toString();
-                        chat.server.send(number);
-                    }
-                });
-
-            };
-      
-
-            $.connection.hub.start().done(function () {
-                //$('#sendmessage').click(function () {
-                //    // Call the Send method on the hub.
-                //    chat.server.send($('#displayname').val(), $('#message').val());
-                //    // Clear text box and reset focus for next comment.
-                //    $('#message').val('').focus();
-                //});
-                $('#clkDraw').click(function () {
-                    chat.server.loadNumber();
-                });
-            });
-
-            setInterval(function () {
-                $('.star-1').fadeOut(150).delay(2000).fadeIn(300).fadeOut(150).delay(1254);
-                $('.star-2').fadeOut(300).fadeIn(120).fadeOut(120).delay(1920);
-                $('.star-3').fadeOut(150).delay(1200).fadeIn(300).fadeOut(150).delay(800);
-                $('.star-4').fadeOut(700).fadeIn(300).fadeOut(160).delay(1350);
-                $('.star-5').fadeOut(400).fadeIn(300).fadeOut(160).delay(1750);
-                $('.star-6').fadeOut(600).fadeIn(300).fadeOut(160).delay(1450);
-            }, 1);
+    <script>
+        var chat = $.connection.myHub;
+        chat.client.loadPage = function () {
+            window.location = 'draw.html'
+        };
+        $.connection.hub.start().done(function () {
+            console.log('connect thành công');
         });
-        // $('.demo').fireworks({ sound: true, opacity: 0.2, width: '100%', height: '100%'});
-        /*Downloaded from https://www.codeseek.co/franciscoknebel/jqueryfireworks-pgmYMo */
-        /* example functionality */
-        $(document).ready(function () {
-            $('#summonFireworks').click(function () {
-                $('.congrat').show('slow');
-                $("#example").fireworks();
-                jQuery("#example").before(jQuery("canvas")); //this makes the canvas appear behind the example text
-            });
-
-            $('#destroyFireworks').click(function () {
-                $('.congrat').hide();
-                $("#example").fireworks('destroy');
-            });
-
-
+        jQuery("body").buoyant({
+            numberOfItems: 20,
+            background: "#fff",
+            minRadius: 5,
+            maxRadius: 30,
+            elementClass: 'circles'
         });
 
-        /*
-        Adapted from http://jsfiddle.net/dtrooper/AceJJ/
-
-        TODO:
-         * Try to get rid of ghosting
-         * See if anything can be made more efficient
-         * Make the canvas fit in the z-order
-        */
-
-        (function ($) {
-            var MAX_ROCKETS = 5,
-                MAX_PARTICLES = 500;
-
-            var FUNCTIONS = {
-                'init': function (element) {
-                    var jqe = $(element);
-
-                    // Check this element isn't already inited
-                    if (jqe.data('fireworks_data') !== undefined) {
-                        console.log('Looks like this element is already inited!');
-                        return;
-                    }
-
-                    // Setup fireworks on this element
-                    var canvas = document.createElement('canvas'),
-                        canvas_buffer = document.createElement('canvas'),
-                        data = {
-                            'element': element,
-                            'canvas': canvas,
-                            'context': canvas.getContext('2d'),
-                            'canvas_buffer': canvas_buffer,
-                            'context_buffer': canvas_buffer.getContext('2d'),
-                            'particles': [],
-                            'rockets': []
-                        };
-
-                    // Add & position the canvas
-                    if (jqe.css('position') === 'static') {
-                        element.style.position = 'relative';
-                    }
-                    element.appendChild(canvas);
-                    canvas.style.position = 'absolute';
-                    canvas.style.top = '0px';
-                    canvas.style.bottom = '0px';
-                    canvas.style.left = '0px';
-                    canvas.style.right = '0px';
-
-                    // Kickoff the loops
-                    data.interval = setInterval(loop.bind(this, data), 1000 / 50);
-
-                    // Save the data for later
-                    jqe.data('fireworks_data', data);
-                },
-                'destroy': function (element) {
-                    var jqe = $(element);
-
-                    // Check this element isn't already inited
-                    if (jqe.data('fireworks_data') === undefined) {
-                        console.log('Looks like this element is not yet inited!');
-                        return;
-                    }
-                    var data = jqe.data('fireworks_data');
-                    jqe.removeData('fireworks_data');
-
-                    // Stop the interval
-                    clearInterval(data.interval);
-
-                    // Remove the canvas
-                    data.canvas.remove();
-
-                    // Reset the elements positioning
-                    data.element.style.position = '';
-                }
-            };
-
-            $.fn.fireworks = function (action) {
-                // Assume no action means we want to init
-                if (!action) {
-                    action = 'init';
-                }
-
-                // Process each element
-                this.each(function () {
-                    FUNCTIONS[action](this);
-                });
-
-                // Chaining ftw :)
-                return this;
-            };
-
-            function launch(data) {
-                if (data.rockets.length < MAX_ROCKETS) {
-                    var rocket = new Rocket(data);
-                    data.rockets.push(rocket);
-                }
+        var flag = 0;
+        setInterval(function () {
+            if (flag == 0) {
+                $('#vacancy').css('text-shadow', '0 0 10px #7dba46, 0 0 20px #49a63c, 0 0 30px #cfffbf, 0 0 40px #4faf54, 0 0 70px #63b640, 0 0 80px #6fdc8a, 0 0 100px #55ce75');
+                flag = 1;
             }
-
-            function loop(data) {
-                // Launch a new rocket
-                launch(data);
-
-                // Update screen size
-                if (data.canvas_width != data.element.offsetWidth) {
-                    data.canvas_width = data.canvas.width = data.canvas_buffer.width = data.element.offsetWidth;
-                }
-                if (data.canvas_height != data.element.offsetHeight) {
-                    data.canvas_height = data.canvas.height = data.canvas_buffer.height = data.element.offsetHeight;
-                }
-
-                // Fade the background out slowly
-                data.context_buffer.clearRect(0, 0, data.canvas.width, data.canvas.height);
-                data.context_buffer.globalAlpha = 0.9;
-                data.context_buffer.drawImage(data.canvas, 0, 0);
-                data.context.clearRect(0, 0, data.canvas.width, data.canvas.height);
-                data.context.drawImage(data.canvas_buffer, 0, 0);
-
-                // Update the rockets
-                var existingRockets = [];
-                data.rockets.forEach(function (rocket) {
-                    // update and render
-                    rocket.update();
-                    rocket.render(data.context);
-
-                    // random chance of 1% if rockets is above the middle
-                    var randomChance = rocket.pos.y < (data.canvas.height * 2 / 3) ? (Math.random() * 100 <= 1) : false;
-
-                    /* Explosion rules
-                         - 80% of screen
-                        - going down
-                        - close to the mouse
-                        - 1% chance of random explosion
-                    */
-                    if (rocket.pos.y < data.canvas.height / 5 || rocket.vel.y >= 0 || randomChance) {
-                        rocket.explode(data);
-                    } else {
-                        existingRockets.push(rocket);
-                    }
-                });
-                data.rockets = existingRockets;
-
-                // Update the particles
-                var existingParticles = [];
-                data.particles.forEach(function (particle) {
-                    particle.update();
-
-                    // render and save particles that can be rendered
-                    if (particle.exists()) {
-                        particle.render(data.context);
-                        existingParticles.push(particle);
-                    }
-                });
-                data.particles = existingParticles;
-
-                while (data.particles.length > MAX_PARTICLES) {
-                    data.particles.shift();
-                }
+            else {
+                $('#vacancy').css('text-shadow', 'none');
+                flag = 0;
             }
-
-            function Particle(pos) {
-                this.pos = {
-                    x: pos ? pos.x : 0,
-                    y: pos ? pos.y : 0
-                };
-                this.vel = {
-                    x: 0,
-                    y: 0
-                };
-                this.shrink = .97;
-                this.size = 2;
-
-                this.resistance = 1;
-                this.gravity = 0;
-
-                this.flick = false;
-
-                this.alpha = 1;
-                this.fade = 0;
-                this.color = 0;
-            }
-
-            Particle.prototype.update = function () {
-                // apply resistance
-                this.vel.x *= this.resistance;
-                this.vel.y *= this.resistance;
-
-                // gravity down
-                this.vel.y += this.gravity;
-
-                // update position based on speed
-                this.pos.x += this.vel.x;
-                this.pos.y += this.vel.y;
-
-                // shrink
-                this.size *= this.shrink;
-
-                // fade out
-                this.alpha -= this.fade;
-            };
-
-            Particle.prototype.render = function (c) {
-                if (!this.exists()) {
-                    return;
-                }
-
-                c.save();
-
-                c.globalCompositeOperation = 'lighter';
-
-                var x = this.pos.x,
-                    y = this.pos.y,
-                    r = this.size / 2;
-
-                var gradient = c.createRadialGradient(x, y, 0.1, x, y, r);
-                gradient.addColorStop(0.1, "rgba(255,255,255," + this.alpha + ")");
-                gradient.addColorStop(0.8, "hsla(" + this.color + ", 100%, 50%, " + this.alpha + ")");
-                gradient.addColorStop(1, "hsla(" + this.color + ", 100%, 50%, 0.1)");
-
-                c.fillStyle = gradient;
-
-                c.beginPath();
-                c.arc(this.pos.x, this.pos.y, this.flick ? Math.random() * this.size : this.size, 0, Math.PI * 2, true);
-                c.closePath();
-                c.fill();
-
-                c.restore();
-            };
-
-            Particle.prototype.exists = function () {
-                return this.alpha >= 0.1 && this.size >= 1;
-            };
-
-            function Rocket(data) {
-                Particle.apply(
-                    this,
-                    [{
-                        x: Math.random() * data.canvas.width * 2 / 3 + data.canvas.width / 6,
-                        y: data.canvas.height
-                    }]
-                );
-
-                this.explosionColor = Math.floor(Math.random() * 360 / 10) * 10;
-                this.vel.y = Math.random() * -3 - 4;
-                this.vel.x = Math.random() * 6 - 3;
-                this.size = 2;
-                this.shrink = 0.999;
-                this.gravity = 0.01;
-            }
-
-            Rocket.prototype = new Particle();
-            Rocket.prototype.constructor = Rocket;
-
-            Rocket.prototype.explode = function (data) {
-                var count = Math.random() * 10 + 80;
-
-                for (var i = 0; i < count; i++) {
-                    var particle = new Particle(this.pos);
-                    var angle = Math.random() * Math.PI * 2;
-
-                    // emulate 3D effect by using cosine and put more particles in the middle
-                    var speed = Math.cos(Math.random() * Math.PI / 2) * 15;
-
-                    particle.vel.x = Math.cos(angle) * speed;
-                    particle.vel.y = Math.sin(angle) * speed;
-
-                    particle.size = 10;
-
-                    particle.gravity = 0.2;
-                    particle.resistance = 0.92;
-                    particle.shrink = Math.random() * 0.05 + 0.93;
-
-                    particle.flick = true;
-                    particle.color = this.explosionColor;
-
-                    data.particles.push(particle);
-                }
-            };
-
-            Rocket.prototype.render = function (c) {
-                if (!this.exists()) {
-                    return;
-                }
-
-                c.save();
-
-                c.globalCompositeOperation = 'lighter';
-
-                var x = this.pos.x,
-                    y = this.pos.y,
-                    r = this.size / 2;
-
-                var gradient = c.createRadialGradient(x, y, 0.1, x, y, r);
-                gradient.addColorStop(0.1, "rgba(255, 255, 255 ," + this.alpha + ")");
-                gradient.addColorStop(0.2, "rgba(255, 180, 0, " + this.alpha + ")");
-
-                c.fillStyle = gradient;
-
-                c.beginPath();
-                c.arc(this.pos.x, this.pos.y, this.flick ? Math.random() * this.size / 2 + this.size / 2 : this.size, 0, Math.PI * 2, true);
-                c.closePath();
-                c.fill();
-
-                c.restore();
-            };
-        }(jQuery));
+        }, 1000);
     </script>
+
 </body>
+
 </html>
