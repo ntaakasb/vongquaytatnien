@@ -348,6 +348,7 @@
 
 
             $.connection.hub.start().done(function () {
+                console.log('connected');
                 $('#clkDraw').click(function () {
                     chat.server.loadNumber();
                 });

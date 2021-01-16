@@ -1,9 +1,0 @@
-Fonts used in this design:
-
-Font: 20db
-Author: Jovanny Lemonad
-Url: http://www.fontsquirrel.com/fonts/20-db
-
-Font: Bebas Neue
-Author: Fontfabric
-Url: http://www.fontsquirrel.com/fonts/bebas-neue
