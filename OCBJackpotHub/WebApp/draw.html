@@ -87,11 +87,6 @@
             }
 
 
-        .slotwrapper {
-            overflow: hidden;
-            display: inline-block;
-            height: 200px;
-        }
 
             .slotwrapper ul {
                 padding: 0;
@@ -200,6 +195,7 @@
             font-size: 3rem;
             color: #fff;
         }
+
     </style>
 </head>
 <body>
@@ -265,7 +261,7 @@
 
         <!--<img class="person" src="img/person.png" />-->
         <img class="phone-omni" src="img/phone-omni.png" />
-        <h3 class="congrat">XIN CHÚC MỪNG</h3>
+        <h3 class="congrat">CHÚC MỪNG</h3>
     </div>
     <div id="example" align="center" style="width: 100%; height: 80%;">
         <button id="summonFireworks" style="display: none;">Summon</button>
@@ -348,7 +344,6 @@
 
 
             $.connection.hub.start().done(function () {
-                console.log('connected');
                 $('#clkDraw').click(function () {
                     chat.server.loadNumber();
                 });

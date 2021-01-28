@@ -21,22 +21,27 @@ body {
 .panel-primary {
     position: absolute;
     left: 29%;
-    top: 30%;
+    top: 40%;
+}
+
+.panel-body {
+    background: url(/img/khungquay.png) no-repeat;
+    height: 300px;
+    width: 800px;
 }
 
 .slotwrapper {
     padding-left: 59px;
     overflow: hidden;
     display: inline-block;
-    height: 200px;
-    background: url(/img/khungquay.png) no-repeat;
-    width: 745px;
+    height: 170px;
+    margin-top: 16px;
 }
     .slotwrapper ul {
         width: 215px;
         height: 178px;
         font-size: 150px;
-        line-height: 200px;
+        line-height: 180px;
         text-align: center;
         color: #1dd254;
         -webkit-text-stroke-width: 1px;
@@ -80,7 +85,7 @@ body {
 
 .congrat {
     position: absolute;
-    left: 38%;
-    top: 20%;
+    left: 30%;
+    top: 25%;
     display: none;
 }
