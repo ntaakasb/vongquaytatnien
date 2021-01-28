@@ -24,29 +24,24 @@ namespace WebApp
             Services _services = new Services();
             List<LuckyNumber> lsNumber = new List<LuckyNumber>();
             lsNumber = _services.loadNumber();
-
+            LuckyNumber _item = new LuckyNumber();
+            string number = string.Empty;
 
             if (lsNumber != null && lsNumber.Any())
             {
-                Random r = new Random();
-                int num = r.Next(0, lsNumber.Count);
-                LuckyNumber _item = new LuckyNumber();
-                _item = lsNumber[num];
-                string number =_item.number1.ToString() + _item.number2.ToString() + _item.number3.ToString();
+               
                
                
                 var lsResult = _services.getAllResult();
                 if(lsResult != null && lsResult.Any())
                 {
-                    bool isExits = false;
-                    isExits = lsResult.Any(x => x.number == number.Trim());
-                    while (isExits)
-                    {
-                        num = r.Next(0, lsNumber.Count);
-                        isExits = lsResult.Any(x => x.number == number.Trim());
-                    }
+                    var lsNewMerge = lsNumber.Where(x => !lsResult.Where(es => es.number.ToString().Trim() == x.number1.ToString() + x.number2.ToString() + x.number3.ToString()).Any()).ToList();
 
-                    _item = lsNumber[num];
+                    Random r = new Random();
+                    int num = r.Next(0, lsNumber.Count);
+                    
+                    _item = lsNewMerge[num];
+                    number = _item.number1.ToString() + _item.number2.ToString() + _item.number3.ToString();
                 }
 
                 _services.writeResult(number);

@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace WebApp
 {
-    public class Services 
+    public class Services
     {
         public string sessionKey = "_OCB_spinner";
 
@@ -65,6 +65,11 @@ namespace WebApp
             catch (Exception ex)
             {
                 string e = ex.Message;
+                string path = HttpContext.Current.Server.MapPath("/data/");
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(path + @"log.txt", true))
+                {
+                    file.WriteLine(ex.Message);
+                }
                 return new List<LuckyNumber>();
             }
             finally
@@ -121,7 +126,7 @@ namespace WebApp
                     document.Save(url);
                 }
             }
-          catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

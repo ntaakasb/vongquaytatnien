@@ -10,6 +10,7 @@
 body {
     background: url('/img/bg.jpg') no-repeat;
     background-size: cover;
+    overflow: hidden;
 }
 .person {
     width: 37%;
@@ -19,9 +20,10 @@ body {
 }
 
 .panel-primary {
-    position: absolute;
+    /*position: absolute;
     left: 29%;
-    top: 40%;
+    top: 30%;*/
+    margin: 0 auto;
 }
 
 .panel-body {
@@ -50,7 +52,7 @@ body {
 
 .phone-omni {
     position: absolute;
-    right: 5%;
+    right: 0;
     bottom: 0;
     width: 25%;
 }
@@ -84,8 +86,6 @@ body {
 }
 
 .congrat {
-    position: absolute;
-    left: 30%;
-    top: 25%;
+    margin: 0 auto;
     display: none;
 }
